@@ -1,59 +1,106 @@
-# GrowupFrontend
+# GrowUp – Frontend (Angular + Tailwind CSS + PrimeNG)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+Plataforma digital para aprendizaje, proyectos y progreso personal/profesional. Este repositorio contiene el **frontend** del MVP de GrowUp.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🧱 Stack
+- **Angular 19** (standalone components, routing, signals)
+- **TypeScript** estricto
+- **Tailwind CSS v4** (utilidades + tema personalizado)
+- **PrimeNG** + **PrimeIcons** (componentes de UI ricos)
+- **ESLint** / Prettier
+- **Git Flow simple** (main, develop, feature/*) y **Conventional Commits**
 
+## 📋 Requisitos
+- Node.js ≥ 18 LTS
+- npm ≥ 9
+- Angular CLI (recomendado): `npm i -g @angular/cli`
+
+## 🚀 Puesta en marcha
 ```bash
-ng serve
+npm install
+ng serve -o
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+## 📦 Scripts
 ```bash
-ng generate component component-name
-```
+# Desarrollo
+ng serve -o
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+# Produccion
+ng build --configuration production
 
-```bash
-ng generate --help
-```
+# Lint
+ng lint
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+# Tests (si estan configurados)
 ng test
 ```
 
-## Running end-to-end tests
+## 🧭 Arquitectura Frontend
+El frontend se organiza por **capas** y **features**:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+src/
+├─ app/
+│  ├─ core/                # Servicios globales, guards, interceptores, config
+│  ├─ layout/              # Shell: header, sidebar, main
+│  ├─ shared/              # Reutilizables (componentes, pipes, directivas)
+│  ├─ features/            # Dominios: landing, auth, dashboard, courses, profile
+│  ├─ theme/               # Tokens CSS, helpers de Tailwind, dark mode
+│  ├─ app.routes.ts        # Arbol de rutas
+│  └─ app.component.ts     # Bootstrap (router-outlet)
+├─ assets/                 # Imagenes, iconos, fuentes
+├─ styles.scss             # Tailwind + estilos globales
+└─ main.ts                 # bootstrapApplication()
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- **core/**: `AuthService` (mock -> JWT despues), `authGuard`, `http.service`, interceptores.
+- **shared/**: UI reutilizable (cards, avatar, loaders), pipes comunes, utilidades.
+- **features/**: paginas autocontenidas (standalone) con sus servicios y modelos.
+- **theme/**: variables CSS (tokens), integracion paleta + Tailwind, modo oscuro.
 
-## Additional Resources
+## 🗺️ Rutas (MVP)
+- Publico: `/landing`, `/auth/login`
+- Privado (con `authGuard`): `/dashboard`, `/courses`, `/profile`
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🔐 Autenticacion (mock -> real)
+- **MVP**: estado simulado con `signals` y guard de rutas.
+- **Evolucion**: JWT + refresh tokens; interceptor para `Authorization: Bearer`.
+
+## 🎨 Tema
+- Paleta y tipografias definidas en `theme/tokens.css` y `tailwind.config.js`.
+- Helpers (`.bg-surface`, `.text-on-surface`, etc.) en `styles.scss`.
+- **Dark Mode** con clase `.dark` en `<html>` o `<body>`.
+
+## 🧩 UI (PrimeNG + Tailwind)
+- PrimeNG para componentes complejos (tabla, dialogo, datepicker, file upload).
+- Tailwind para layout, spacing, tipografia y color utilitario.
+- Importar **solo** los modulos de PrimeNG usados por pagina para cuidar el bundle.
+
+## 🗃️ Estado y datos
+- Servicios por feature; datos **mock** en el MVP.
+- Posteriormente: integracion REST con backend (`/api/v1/...`).
+
+## ✅ Calidad
+- Convenciones: **Conventional Commits** (`feat:`, `fix:`, `docs:`, `chore:`...)
+- Lint obligatorio en PRs.
+- Tests unitarios en features criticas (auth guard, servicios).
+
+## 🌿 Flujo Git recomendado
+- `main` -> estable.
+- `develop` -> integracion.
+- `feature/*` -> cada historia/tarea.
+- Releases: `release/x.y.z` + tag `vX.Y.Z`.
+
+## 🤖 CI (GitHub Actions)
+Workflow minimo: `npm ci` -> `ng lint` -> `ng build --configuration production` en cada PR a `develop`/`main`.
+
+## 🗺️ Roadmap (resumen)
+- **Sprint 1**: Layout + Routing + Auth mock.
+- **Sprint 2**: Cursos (tabla + dialogo CRUD mock) y Perfil.
+- **Sprint 3**: Tema (tokens/dark) y Accesibilidad base.
+
+## 📄 Licencia
+MIT
