@@ -34,6 +34,26 @@ El proyecto está organizado para reflejar una estructura de empresa moderna, fa
 * **`/docker`**: Archivos de configuración para la orquestación de contenedores.
 * **`/infrastructure`**: Infraestructura como código y pipelines de CI/CD (GitHub Actions).
 
+graph TD
+    User((Usuario)) --> |Accede| PWA[Angular PWA / Microfrontends]
+    
+    subgraph Frontend
+        PWA --> Admin[MF Admin]
+        PWA --> Formador[MF Formador]
+        PWA --> Alumno[MF Alumno]
+    end
+
+    subgraph Backend
+        Admin & Formador & Alumno --> Gateway[API Gateway]
+        Gateway --> Auth[Auth Service / JWT]
+        Gateway --> UserSrv[User Service]
+        Gateway --> CourseSrv[Course Service]
+    end
+
+    subgraph Cloud
+        Auth --> DB[(PostgreSQL)]
+        CourseSrv --> S3[AWS S3 - Media]
+    end
 
 
 ---
@@ -48,16 +68,28 @@ El proyecto está organizado para reflejar una estructura de empresa moderna, fa
 
 ## 🚀 Objetivos Técnicos Clave
 
-* [cite_start]**Pipeline CI/CD**: Implementación de flujo automatizado para construcción, prueba y despliegue en AWS[cite: 12].
-* [cite_start]**Almacenamiento Cloud**: Integración con AWS S3 para la gestión de certificados e imágenes[cite: 15].
-* [cite_start]**Integración Legacy**: Incorporación de un microservicio SOAP para verificación de certificados[cite: 15].
-* [cite_start]**Monitoreo**: Configuración de CloudWatch o Prometheus/Grafana para control de logs y estado del sistema[cite: 15].
+* **Pipeline CI/CD**: Implementación de flujo automatizado para construcción, prueba y despliegue en AWS.
+* **Almacenamiento Cloud**: Integración con AWS S3 para la gestión de certificados e imágenes.
+* **Integración Legacy**: Incorporación de un microservicio SOAP para verificación de certificados.
+* **Monitoreo**: Configuración de CloudWatch o Prometheus/Grafana para control de logs y estado del sistema.
 
 ---
 
 ## 📄 Valor Añadido
 
-[cite_start]GrowUp no es solo una aplicación; es la demostración de dominio del ciclo completo de desarrollo, desde la planificación ágil (Scrum) hasta el mantenimiento y despliegue (DevOps)[cite: 13, 23]. [cite_start]Está diseñado para evolucionar como un portfolio profesional de alto impacto[cite: 24].
+GrowUp no es solo una aplicación; es la demostración de dominio del ciclo completo de desarrollo, desde la planificación ágil (Scrum) hasta el mantenimiento y despliegue (DevOps). Está diseñado para evolucionar como un portfolio profesional de alto impacto.
 
 ---
 *Desarrollado con ❤️ como proyecto integral Fullstack.*
+
+## 🚀 Inicio Rápido
+
+Este es un monorepo. Para trabajar en una parte específica, navega a su directorio:
+
+### Frontend (Angular PWA)
+Localizado en `/frontend`.
+1. `cd frontend`
+2. `npm install`
+3. `ng serve -o`
+
+> Consulta el [README de Frontend](./frontend/README.md) para ver la arquitectura detallada de capas y componentes.
