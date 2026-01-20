@@ -1,106 +1,71 @@
-# GrowUp – Frontend (Angular + Tailwind CSS + PrimeNG)
+# GrowUp – Monorepo Experience (Nx + Angular + React)
 
-Plataforma digital para aprendizaje, proyectos y progreso personal/profesional. Este repositorio contiene el **frontend** del MVP de GrowUp.
+Plataforma digital integral para aprendizaje, gestión de cursos y administración centralizada. Este repositorio ha evolucionado hacia una arquitectura de **Microfrontends (MFE)** gestionada con **Nx Monorepo**.
 
 ---
 
-## 🧱 Stack
-- **Angular 19** (standalone components, routing, signals)
-- **TypeScript** estricto
-- **Tailwind CSS v4** (utilidades + tema personalizado)
-- **PrimeNG** + **PrimeIcons** (componentes de UI ricos)
-- **ESLint** / Prettier
-- **Git Flow simple** (main, develop, feature/*) y **Conventional Commits**
+## 🏗️ Arquitectura de Microfrontends
+GrowUp utiliza **Module Federation** para orquestar diferentes ecosistemas de frontend bajo un mismo contenedor (**Shell**).
 
-## 📋 Requisitos
-- Node.js ≥ 18 LTS
-- npm ≥ 9
-- Angular CLI (recomendado): `npm i -g @angular/cli`
+- **Shell (Angular)**: El "Core" que orquesta la autenticación, el menú principal y la capacidad **PWA**.
+- **Student (Angular)**: El área de aprendizaje que hemos construido (Dashboard, Catálogo, Mis Cursos).
+- **Trainer (React)**: Herramientas avanzadas para que los formadores gestionen y creen contenidos.
+- **Admin (React/Angular)**: Panel de control total de la plataforma.
 
-## 🚀 Puesta en marcha
+---
+
+## 🧱 Stack Tecnológico
+- **Herramientas**: [Nx](https://nx.dev/) (Monorepo & Build System)
+- **Frameworks**: Angular 20 (Student/Shell) + React 19 (Trainer/Admin)
+- **Estilos**: **Tailwind CSS v4** (Sistema de diseño compartido)
+- **UI Components**: PrimeNG (Angular) + PrimeReact (React)
+- **Conceptos**: Signals, Module Federation, PWA Service Workers.
+
+---
+
+## 🧭 Estructura del Proyecto (NX)
+```text
+growup/
+├── apps/               # Aplicaciones desplegables
+│   ├── shell/          # Host: Landing, Auth y PWA
+│   ├── student/        # MFE: Experiencia del alumno
+│   └── trainer/        # MFE: Experiencia del formador (React)
+├── libs/               # Código compartido (Reutilización al 100%)
+│   ├── shared/
+│   │   ├── ui/         # Componentes Tailwind reutilizables
+│   │   ├── data-access/# Servicios, Modelos e Interceptores
+│   │   └── util/       # Guards, Helpers y Pipes
+├── backend/            # Lógica de servidor y API
+└── docker/             # Configuración de despliegue y contenedores
+```
+
+---
+
+## 🚀 Puesta en marcha (Workspace Nx)
 ```bash
+# Instalar dependencias
 npm install
-ng serve -o
+
+# Servir el ecosistema completo (Shell + Remotos)
+npx nx serve shell
+
+# Servir una app específica
+npx nx serve student
 ```
 
-## 📦 Scripts
-```bash
-# Desarrollo
-ng serve -o
+## 🔐 Roles y Seguridad
+- **Roles**: RBAC (Role Based Access Control) gestionado desde el Shell.
+- **Backend Interop**: Comunicación vía API REST con intercambio de tokens JWT compartido entre microfrontends.
 
-# Produccion
-ng build --configuration production
+## ✅ Calidad y Estándares
+- **Nx Graph**: Visualización automática de dependencias para evitar acoplamientos.
+- **Atomic Design**: Componentes compartidos en librerías UI para garantizar consistencia visual en toda la plataforma.
 
-# Lint
-ng lint
+---
 
-# Tests (si estan configurados)
-ng test
-```
-
-## 🧭 Arquitectura Frontend
-El frontend se organiza por **capas** y **features**:
-
-```
-src/
-├─ app/
-│  ├─ core/                # Servicios globales, guards, interceptores, config
-│  ├─ layout/              # Shell: header, sidebar, main
-│  ├─ shared/              # Reutilizables (componentes, pipes, directivas)
-│  ├─ features/            # Dominios: landing, auth, dashboard, courses, profile
-│  ├─ theme/               # Tokens CSS, helpers de Tailwind, dark mode
-│  ├─ app.routes.ts        # Arbol de rutas
-│  └─ app.component.ts     # Bootstrap (router-outlet)
-├─ assets/                 # Imagenes, iconos, fuentes
-├─ styles.scss             # Tailwind + estilos globales
-└─ main.ts                 # bootstrapApplication()
-```
-
-- **core/**: `AuthService` (mock -> JWT despues), `authGuard`, `http.service`, interceptores.
-- **shared/**: UI reutilizable (cards, avatar, loaders), pipes comunes, utilidades.
-- **features/**: paginas autocontenidas (standalone) con sus servicios y modelos.
-- **theme/**: variables CSS (tokens), integracion paleta + Tailwind, modo oscuro.
-
-## 🗺️ Rutas (MVP)
-- Publico: `/landing`, `/auth/login`
-- Privado (con `authGuard`): `/dashboard`, `/courses`, `/profile`
-
-## 🔐 Autenticacion (mock -> real)
-- **MVP**: estado simulado con `signals` y guard de rutas.
-- **Evolucion**: JWT + refresh tokens; interceptor para `Authorization: Bearer`.
-
-## 🎨 Tema
-- Paleta y tipografias definidas en `theme/tokens.css` y `tailwind.config.js`.
-- Helpers (`.bg-surface`, `.text-on-surface`, etc.) en `styles.scss`.
-- **Dark Mode** con clase `.dark` en `<html>` o `<body>`.
-
-## 🧩 UI (PrimeNG + Tailwind)
-- PrimeNG para componentes complejos (tabla, dialogo, datepicker, file upload).
-- Tailwind para layout, spacing, tipografia y color utilitario.
-- Importar **solo** los modulos de PrimeNG usados por pagina para cuidar el bundle.
-
-## 🗃️ Estado y datos
-- Servicios por feature; datos **mock** en el MVP.
-- Posteriormente: integracion REST con backend (`/api/v1/...`).
-
-## ✅ Calidad
-- Convenciones: **Conventional Commits** (`feat:`, `fix:`, `docs:`, `chore:`...)
-- Lint obligatorio en PRs.
-- Tests unitarios en features criticas (auth guard, servicios).
-
-## 🌿 Flujo Git recomendado
-- `main` -> estable.
-- `develop` -> integracion.
-- `feature/*` -> cada historia/tarea.
-- Releases: `release/x.y.z` + tag `vX.Y.Z`.
-
-## 🤖 CI (GitHub Actions)
-Workflow minimo: `npm ci` -> `ng lint` -> `ng build --configuration production` en cada PR a `develop`/`main`.
-
-## 🗺️ Roadmap (resumen)
-- **Sprint 1**: Layout + Routing + Auth mock.
-- **Sprint 2**: Cursos (tabla + dialogo CRUD mock) y Perfil.
-- **Sprint 3**: Tema (tokens/dark) y Accesibilidad base.
+## 🌿 Estrategia de Ramas
+- `main`: Código estable y productivo.
+- `feature/nx-migration`: Rama actual de transición a monorepo.
 
 ## 📄 Licencia
 MIT

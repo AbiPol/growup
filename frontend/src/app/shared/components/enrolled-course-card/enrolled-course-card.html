@@ -1,0 +1,60 @@
+<article
+    class="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-700 hover:shadow-md transition-all duration-300">
+    <div class="flex flex-col md:flex-row items-center gap-4">
+
+        <!-- Imagen del curso -->
+        <figure class="relative w-full md:w-32 h-32 md:h-20 shrink-0 m-0">
+            <img [src]="course().imageUrl" [alt]="'Portada del curso ' + course().name"
+                class="w-full h-full object-cover rounded-lg shadow-sm" />
+
+            @if (course().status === 'completed') {
+            <div class="absolute top-1 right-1 bg-green-500 text-white rounded-full p-1 shadow-sm flex items-center justify-center w-6 h-6"
+                pTooltip="Completado">
+                <i class="pi pi-check text-[10px]" aria-hidden="true"></i>
+                <span class="sr-only">Completado</span>
+            </div>
+            }
+            @if (course().status === 'archived') {
+            <div class="absolute inset-0 bg-gray-900/40 rounded-lg flex items-center justify-center">
+                <i class="pi pi-box text-white text-xl" aria-hidden="true"></i>
+                <span class="sr-only">Archivado</span>
+            </div>
+            }
+        </figure>
+
+        <!-- Información del curso -->
+        <section class="flex-1 w-full space-y-2">
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white m-0 leading-tight">
+                    {{ course().name }}
+                </h3>
+                <p-tag [value]="course().category" severity="info" class="!text-xs"></p-tag>
+            </header>
+
+            <main>
+                <p class="text-xs text-gray-500 dark:text-gray-300 m-0">
+                    Instructor: <span class="font-medium text-gray-700 dark:text-gray-200">{{ course().instructor.name
+                        }}</span>
+                </p>
+            </main>
+
+            <!-- Progreso -->
+            <footer class="flex items-center gap-3">
+                <div class="w-full" [attr.aria-label]="'Progreso: ' + course().progress + '%'">
+                    <p-progressBar [value]="course().progress" [showValue]="false" class="!h-1.5"></p-progressBar>
+                </div>
+                <span class="text-xs font-bold text-gray-700 dark:text-gray-200 w-10 text-right">
+                    {{ course().progress }}%
+                </span>
+            </footer>
+        </section>
+
+        <!-- Acción -->
+        <footer class="w-full md:w-auto flex justify-end">
+            <p-button [label]="buttonLabel" [icon]="buttonIcon"
+                [severity]="course().status === 'archived' ? 'secondary' : 'primary'" size="small" [rounded]="true"
+                (onClick)="onAction.emit(course())" [attr.aria-label]="buttonLabel + ' ' + course().name">
+            </p-button>
+        </footer>
+    </div>
+</article>

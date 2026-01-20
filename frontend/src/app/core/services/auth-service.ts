@@ -17,7 +17,7 @@ export class AuthService {
 
   checkAuthStatus() {
     const token = localStorage.getItem('growup-token');
-    console.log('token: ', token);
+    //console.log('token: ', token);
     if (token) {
       this._user.set({ id: '1', name: 'Prueba', email: 'prueba@gmail.com', isActive: true, role: Role.STUDENT });
       this._statusUser.set(AuthStatus.authenticated);

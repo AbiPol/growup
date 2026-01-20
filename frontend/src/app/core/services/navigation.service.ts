@@ -14,7 +14,9 @@ export class NavigationService {
     role = this.authService.userRole();
 
     studentMenu: MenuItem[] = studentRoutes
-        //.filter(items => items.path !== '**')
+        .filter(items => items.path !== '**')
+        .filter(items => items.path !== '')
+        .filter(items => items.title !== '')
         .map(route => ({
             label: route.title as string,
             icon: route.data?.['icon'] as string,
@@ -23,7 +25,9 @@ export class NavigationService {
         }));
 
     formadorMenu: MenuItem[] = formadorRoutes
-        //.filter(items => items.path !== '**')
+        .filter(items => items.path !== '**')
+        .filter(items => items.path !== '')
+        .filter(items => items.title !== '')
         .map(route => ({
             label: route.title as string,
             icon: route.data?.['icon'] as string,
@@ -32,7 +36,9 @@ export class NavigationService {
         }));
 
     adminMenu: MenuItem[] = adminRoutes
-        //.filter(items => items.path !== '**')
+        .filter(items => items.path !== '**')
+        .filter(items => items.path !== '')
+        .filter(items => items.title !== '')
         .map(route => ({
             label: route.title as string,
             icon: route.data?.['icon'] as string,

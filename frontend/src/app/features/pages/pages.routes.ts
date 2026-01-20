@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Layout } from './layout/layout';
 import { roleRedirectGuard } from '../../core/guards/role-redirect.guard';
+import { CourseDetail } from '../../shared/components/course-detail/course-detail';
 
 export const routes: Routes = [
     {
