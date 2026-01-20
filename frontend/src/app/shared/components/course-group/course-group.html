@@ -1,0 +1,51 @@
+<section class="space-y-6">
+    <!-- Encabezado del Grupo Estilo GrowUp -->
+    <header class="flex justify-between items-end border-b border-gray-100 dark:border-gray-800 pb-3 mb-2 px-1">
+        <div class="flex items-center gap-4">
+            <!-- Indicador GrowUp Triple: Verde -> Naranja -> Azul -->
+            <div class="w-1.5 h-16 bg-gradient-to-b from-green-400 via-orange-400 to-blue-500 rounded-full shadow-sm">
+            </div>
+
+            <div class="flex flex-col">
+                <span
+                    class="text-[10px] font-black uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400 opacity-90 mb-0.5">
+                    Categoría
+                </span>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white m-0 tracking-tight">
+                    {{ title() }}
+                </h2>
+            </div>
+        </div>
+
+        <!-- Contador Estilizado -->
+        <div
+            class="flex items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm">
+            <span class="relative flex h-2 w-2">
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="text-xs font-bold text-gray-700 dark:text-gray-300">
+                {{ courses().length }} {{ courses().length === 1 ? 'Curso' : 'Cursos' }}
+            </span>
+        </div>
+    </header>
+
+    <!-- Lista de Cursos -->
+    <div class="grid grid-cols-1 gap-4">
+        <ul class="list-none p-0 m-0 space-y-4" role="list">
+            @for (course of courses(); track course.id) {
+            <li role="listitem">
+                <growup-enrolled-course-card [course]="course" (onAction)="handleCourseAction($event)">
+                </growup-enrolled-course-card>
+            </li>
+            } @empty {
+            <div
+                class="py-12 text-center bg-white dark:bg-gray-800 rounded-xl border border-dashed border-gray-200 dark:border-gray-700">
+                <i class="pi pi-inbox text-4xl text-gray-300 dark:text-gray-600 mb-2 block" aria-hidden="true"></i>
+                <p class="text-gray-500 dark:text-gray-400 m-0">{{ emptyMessage() }}</p>
+            </div>
+            }
+        </ul>
+    </div>
+</section>

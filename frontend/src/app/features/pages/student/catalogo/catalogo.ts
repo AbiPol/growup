@@ -1,11 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { CourseService } from '../../../../core/services/course.service';
+import { CourseModel } from '../../../../core/models/course.model';
+
+import { CommonModule } from '@angular/common';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { TagModule } from 'primeng/tag';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { SkeletonModule } from 'primeng/skeleton';
+import { CursoCard } from "../../../../shared/components/curso-card/curso-card";
+
 
 @Component({
   selector: 'growup-catalogo',
-  imports: [],
+  imports: [
+    CommonModule,
+    CardModule,
+    ButtonModule,
+    TagModule,
+    InputTextModule,
+    IconFieldModule,
+    InputIconModule,
+    SkeletonModule,
+    CursoCard
+  ],
   templateUrl: './catalogo.html',
   styles: ``,
 })
-export class Catalogo {
 
+export class Catalogo implements OnInit, OnDestroy {
+
+  courseService = inject(CourseService);
+  loading: boolean = true;
+  filteredCourses: CourseModel[] = [];
+
+  ngOnInit() {
+    this.filteredCourses = this.courseService.getCourses();
+
+    // Simular carga de datos para ver el Skeleton
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000); // He bajado el tiempo a 2s para que no esperes tanto probando
+  }
+
+  buscaCurso(text: string) {
+    if (!text) {
+      this.filteredCourses = this.courseService.getCourses();
+      return;
+    }
+
+    this.filteredCourses = this.courseService.getCourses().filter(course =>
+      course.name.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
+  ngOnDestroy() {
+    this.loading = true;
+  }
 }
