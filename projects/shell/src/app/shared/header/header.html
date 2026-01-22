@@ -1,0 +1,33 @@
+<section class="w-full px-6 grid grid-cols-[1fr_auto_1fr] items-center">
+  <!-- Spacer for centering alignment -->
+  <div></div>
+
+  <!-- Logo area (Centered) -->
+  <div class="flex items-center justify-center gap-3">
+    <div class="flex items-center justify-center w-8 h-8 rounded-lg">
+      <img src="assets/flecha-logo.png" class="w-full h-full object-contain" />
+    </div>
+
+    <div class="flex flex-col">
+      <span class="text-xl font-black tracking-tight leading-none">
+        <a routerLink="/">
+          <span class="text-grow font-bold">Grow</span><span class="text-secondary">Up</span>
+        </a>
+      </span>
+      <span class="text-[9px] uppercase tracking-widest text-text-light font-sans text-h3 opacity-70">Ecosystem</span>
+    </div>
+  </div>
+
+  <!-- Actions area (Right aligned) -->
+  <div class="flex justify-end">
+    <button pButton type="button" (click)="toggleDark()"
+      class="bg-transparent text-text hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-full transition-colors"
+      icon="pi pi-moon">
+      @if (isDark) {
+      <span>☀️</span>
+      } @else {
+      <span>🌙</span>
+      }
+    </button>
+  </div>
+</section>

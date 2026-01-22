@@ -1,0 +1,33 @@
+<p-toast position="top-right" key="global-toast" [baseZIndex]="5000"
+    [breakpoints]="{ '920px': { width: '100%', right: '5%', left: '5%' } }">
+    <ng-template let-message pTemplate="headless">
+        <div
+            class="flex items-center gap-3 w-full bg-secondary/40 backdrop-blur-md text-grow px-4 py-3 rounded-lg shadow-2xl border border-gray-800 pointer-events-auto mt-2">
+            <!-- Icono según severidad-->
+            @if (message.severity === 'contrast' || message.severity === 'success') {
+            <i class="pi pi-check-circle text-green-800 text-lg"></i>
+            }
+            @if (message.severity === 'info') {
+            <i class="pi pi-info-circle text-blue-800 text-lg"></i>
+            }
+            @if (message.severity === 'warn') {
+            <i class="pi pi-exclamation-triangle text-yellow-800 text-lg"></i>
+            }
+            @if (message.severity === 'error') {
+            <i class="pi pi-times-circle text-red-800 text-lg"></i>
+            }
+
+            <div class="flex-1 flex gap-2 items-center text-sm">
+                <span class="font-bold whitespace-nowrap">{{ message.summary }}</span>
+                <span class="text-grow-400 hidden sm:inline">-</span>
+                <span class="text-grow-300 truncate">{{ message.detail }}</span>
+            </div>
+
+            <!-- Botón cerrar manual (opcional) -->
+            <div (click)="messageService.clear('global-toast')"
+                class="cursor-pointer hover:bg-white/10 p-1 rounded transition-colors">
+                <i class="pi pi-times text-xs opacity-70"></i>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

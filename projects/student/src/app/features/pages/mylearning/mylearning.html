@@ -1,0 +1,47 @@
+<main class="bg-gray-50 dark:bg-gray-900 min-h-screen px-4 py-8 md:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto flex flex-col gap-1 md:gap-24">
+
+        <!-- Header de la Página -->
+        <header>
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Mi Aprendizaje</h1>
+            <p class="text-gray-500 dark:text-gray-400">Gestiona tus cursos, revisa tus progresos y continúa
+                aprendiendo.</p>
+        </header>
+
+        <!-- Sección: En Curso -->
+        <div class="group-container">
+            <growup-course-group title="En curso" [courses]="activeCourses()"
+                emptyMessage="No tienes cursos activos actualmente." (onCourseAction)="handleCourseAction($event)">
+            </growup-course-group>
+        </div>
+
+        <!-- Sección: Nuevos / Sin Empezar -->
+        @if (notStartedCourses().length > 0) {
+        <div class="group-container">
+            <growup-course-group title="Sin empezar" [courses]="notStartedCourses()"
+                emptyMessage="No tienes cursos nuevos pendientes." (onCourseAction)="handleCourseAction($event)">
+            </growup-course-group>
+        </div>
+        }
+
+        <!-- Sección: Completados -->
+        @if (completedCourses().length > 0) {
+        <div class="group-container">
+            <growup-course-group title="Completados" [courses]="completedCourses()"
+                emptyMessage="Aún no has completado ningún curso. ¡Ánimo!"
+                (onCourseAction)="handleCourseAction($event)">
+            </growup-course-group>
+        </div>
+        }
+
+        <!-- Sección: Archivados -->
+        @if (archivedCourses().length > 0) {
+        <section class="pt-14 border-t border-gray-200 dark:border-gray-800">
+            <growup-course-group title="Cursos archivados" [courses]="archivedCourses()"
+                emptyMessage="No tienes cursos archivados." (onCourseAction)="handleCourseAction($event)">
+            </growup-course-group>
+        </section>
+        }
+
+    </div>
+</main>

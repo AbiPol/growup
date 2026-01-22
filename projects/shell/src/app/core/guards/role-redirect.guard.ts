@@ -1,0 +1,49 @@
+import { inject } from '@angular/core';
+import { CanActivateChildFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth-service';
+import { Role } from '../models/role.enum';
+
+export const roleRedirectGuard: CanActivateChildFn = (childRoute, state) => {
+
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  const role = auth.userRole();
+  const currentUrl = state.url;
+
+  // console.log('entre en canactivatechild del guard ', role)
+  // switch (role) {
+  //   case Role.ADMIN:
+  //     return router.createUrlTree(['/admin']);
+  //   case Role.TEACHER:
+  //     return router.createUrlTree(['/formador']);
+  //   case Role.STUDENT:
+  //     return router.createUrlTree(['student']);
+  //   default:
+  //     return router.createUrlTree(['/']);
+  // }
+
+
+  //console.log('Guard CHILD ejecutado', { role, currentUrl });
+
+  // 1. ADMIN
+  if (role == Role.ADMIN) {
+    if (currentUrl.startsWith('/admin')) return true;
+    return router.createUrlTree(['/admin']);
+  }
+
+  // 2. TEACHER / FORMADOR
+  if (role === Role.TEACHER) {
+    if (currentUrl.startsWith('/formador')) return true;
+    return router.createUrlTree(['/private/formador']);
+  }
+
+  // 3. STUDENT
+  if (role === Role.STUDENT) {
+    if (currentUrl.startsWith('/private/student')) return true;
+    return router.createUrlTree(['/private/student']);
+  }
+
+  // 4. No autenticado
+  return router.createUrlTree(['/auth/login']);
+
+};

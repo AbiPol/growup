@@ -1,0 +1,41 @@
+<div class="flex flex-col h-full bg-surface text-text">
+
+    <!-- Header del Sidebar (Logo o Título, opcional si ya está en el Navbar, pero útil en mobile) -->
+    <div class="p-6 flex items-center gap-3 border-b border-gray-100 dark:border-gray-800">
+        <!-- Puedes poner aquí una versión mini del logo o el nombre del usuario -->
+        <div
+            class="h-10 w-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-lg">
+            {{ primerCharUserName }}
+        </div>
+        <div>
+            <p class="text-sm font-bold truncate">Usuario {{ currentNameUser }}</p>
+            <p class="text-xs text-gray-400">Online</p>
+        </div>
+    </div>
+
+    <!-- Navegación Principal -->
+    <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-1">
+
+        @for (item of menuItems; track item.label) {
+        <a [routerLink]="item.route"
+            routerLinkActive="bg-brand-50 text-brand-700 dark:bg-brand-900/20 dark:text-brand-400 border-l-4 border-brand-500"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="group flex items-center px-4 py-3 text-sm font-medium rounded-r-xl transition-all duration-200 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-brand-600 dark:hover:text-brand-300 border-l-4 border-transparent">
+
+            <i [class]="item.icon" class="mr-3 text-lg transition-colors group-hover:text-brand-500"></i>
+            <span>{{ item.label }}</span>
+        </a>
+        }
+
+    </nav>
+
+    <!-- Footer del Sidebar (Logout, etc) -->
+    <div class="p-4 border-t border-gray-100 dark:border-gray-800">
+        <button (click)="logout()"
+            class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-lg transition-colors">
+            <i class="pi pi-sign-out"></i>
+            <span>Cerrar Sesión</span>
+        </button>
+    </div>
+
+</div>

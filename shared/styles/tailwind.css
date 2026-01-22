@@ -1,0 +1,130 @@
+/* 
+   Coloca aquí tu configuración global de Tailwind.
+   En Tailwind 4, puedes usar @theme, @utility, etc.
+*/
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+/* v4 variant override */
+/* [5](https://tailwindcss.com/docs/dark-mode) */
+
+
+/* === Tema GrowUp — Fresh Growth (modo claro por defecto) === */
+@theme {
+    /* Escala de marca (verde) */
+    --color-brand-50: #F0FDF4;
+    --color-brand-100: #DCFCE7;
+    --color-brand-200: #BBF7D0;
+    --color-brand-300: #86EFAC;
+    --color-brand-400: #4ADE80;
+    --color-brand-500: #22C55E;
+    /* PRIMARY */
+    --color-brand-600: #16A34A;
+    --color-brand-700: #15803D;
+    --color-brand-800: #166534;
+    --color-brand-900: #14532D;
+
+
+    /* ==== BLUE scale ==== */
+    --color-blue-50: #eff6ff;
+    --color-blue-100: #dbeafe;
+    --color-blue-200: #bfdbfe;
+    --color-blue-300: #93c5fd;
+    --color-blue-400: #60a5fa;
+    --color-blue-500: #3b82f6;
+    --color-blue-600: #2563eb;
+    --color-blue-700: #1d4ed8;
+    --color-blue-800: #1e40af;
+    --color-blue-900: #1e3a8a;
+
+
+    /* ==== RED scale ==== */
+    --color-red-50: #fef2f2;
+    --color-red-100: #fee2e2;
+    --color-red-200: #fecaca;
+    --color-red-300: #fca5a5;
+    --color-red-400: #f87171;
+    --color-red-500: #ef4444;
+    --color-red-600: #dc2626;
+    --color-red-700: #b91c1c;
+    --color-red-800: #991b1b;
+    --color-red-900: #7f1d1d;
+
+
+    /* Tokens semánticos (Tailwind generará utilidades text-*, bg-*, border-* para estos) */
+    --color-primary: var(--color-brand-500);
+    --color-secondary: #FF7A00;
+    --color-accent: var(--color-red-400);
+    --color-info: var(--color-blue-400);
+    --color-success: var(--color-blue-600);
+    --color-warning: #F59E0B;
+    --color-error: var(--color-red-500);
+    --color-grow: var(--color-blue-900);
+
+    --color-bg: #F8FAFC;
+    /* neutral-50 */
+    --color-surface: #FFFFFF;
+    --color-text: #0F172A;
+    /* neutral-900 */
+}
+
+/* === Overrides para modo oscuro (toggle por clase .dark) === */
+/* Para que los tokens semánticos tomen valores de runtime, usa @layer base con selectores. */
+@layer base {
+    .dark {
+        --color-bg: #0B1220;
+        --color-surface: #111827;
+        --color-text: #E5E7EB;
+
+        /* Mantén o ajusta primario/acento si lo necesitas */
+        --color-primary: var(--color-brand-600);
+        --color-secondary: #FF7A00;
+
+        /* Ejemplo: azules más profundos en oscuro */
+        --color-info: var(--color-blue-400);
+        /* Ejemplo: error un poco más oscuro para contraste */
+        --color-error: var(--color-red-600);
+        --color-success: var(--color-blue-700);
+        --color-warning: var(--color-orange-500);
+        /*--color-grow: var(--color-blue-800);*/
+
+    }
+}
+
+@theme {
+    /* Familias */
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Manrope", var(--font-sans);
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    /* Escala de tamaños para titulares reutilizables (opcional) */
+    --text-h1: 2.25rem;
+    /* 36px */
+    --text-h1--line-height: 1.15;
+    --text-h1--font-weight: 800;
+
+    --text-h2: 1.875rem;
+    /* 30px */
+    --text-h2--line-height: 1.2;
+    --text-h2--font-weight: 700;
+
+    --text-h3: 1.5rem;
+    /* 24px */
+    --text-h3--line-height: 1.25;
+    --text-h3--font-weight: 700;
+
+    --text-body: 1rem;
+    /* 16px */
+    --text-body--line-height: 1.6;
+    --text-body--font-weight: 400;
+}
+
+/* 4) (Opcional) Ajustes base para <html>/<body> */
+@layer base {
+
+    html,
+    body {
+        font-family: var(--font-sans);
+        font-size: 16px;
+    }
+}

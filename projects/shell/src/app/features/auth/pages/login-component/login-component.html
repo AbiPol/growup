@@ -1,0 +1,42 @@
+<main
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-brand-50 font-sans px-4">
+    <section class="w-full max-w-md bg-surface p-8 rounded-xl shadow-lg border border-blue-100">
+        <header class="text-center mb-8">
+            <a routerLink="/">
+                <h1 class="text-3xl font-display font-bold text-grow mb-2">GrowUp</h1>
+            </a>
+            <p class="text-gray-600">Bienvenido de nuevo</p>
+        </header>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+                <label for="email" class="font-medium text-blue-900">Email</label>
+                <input pInputText id="email" formControlName="email"
+                    class="w-full focus:border-secondary focus:ring-secondary" aria-describedby="email-help" />
+                <small id="email-help" class="text-gray-500">Introduce tu email.</small>
+            </div>
+            @if (hasError()) {
+            <small class="text-red-500">El nombre de usuario es obligatorio.</small>
+            }
+
+            <div class="flex flex-col gap-2">
+                <label for="password" class="font-medium text-blue-900">Contraseña</label>
+                <p-password formControlName="password" [toggleMask]="true" [feedback]="false" class="w-full"
+                    inputStyleClass="w-full focus:border-secondary focus:ring-secondary" placeholder="••••••••">
+                </p-password>
+                @if (hasError()) {
+                <small class="text-red-500">La contraseña NO es correcta.</small>
+                }
+            </div>
+
+            <button pButton type="submit" label="Iniciar Sesión" [disabled]="hasSuccess()"
+                class="w-full bg-secondary border-secondary hover:bg-orange-600 focus:ring-4 focus:ring-orange-200">
+            </button>
+        </form>
+
+        <footer class="mt-6 text-center">
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">¿Olvidaste tu
+                contraseña?</a>
+        </footer>
+    </section>
+</main>

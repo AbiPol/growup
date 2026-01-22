@@ -1,0 +1,174 @@
+<div class="min-h-screen bg-bg dark:bg-gray-900 font-sans selection:bg-secondary selection:text-white">
+    <!-- Navbar -->
+    <nav
+        class="bg-surface/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-brand-100 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <!-- Logo -->
+                    <img src="assets/flecha-logo.png" alt="GrowUp Logo" class="h-10 w-auto object-contain">
+                    <span
+                        class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-700 to-brand-500 dark:from-brand-400 dark:to-brand-300 tracking-tight">GrowUp</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a routerLink="/auth/login"
+                        class="px-4 py-2 text-sm font-medium text-text dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Iniciar
+                        Sesión</a>
+                    <a routerLink="/auth/register"
+                        class="px-5 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 rounded-xl shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 transition-all duration-200">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+        class="relative overflow-hidden pt-24 pb-32 bg-gradient-to-b from-blue-50/50 via-white to-white dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
+        <!-- Background decorations (Blue and Orange accents) -->
+        <div
+            class="absolute -top-24 -left-24 w-96 h-96 bg-blue-200/40 dark:bg-blue-900/20 rounded-full blur-3xl mix-blend-multiply animate-blob">
+        </div>
+        <div
+            class="absolute top-1/2 right-0 w-80 h-80 bg-orange-100/60 dark:bg-orange-900/10 rounded-full blur-3xl mix-blend-multiply animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-32 left-1/3 w-80 h-80 bg-brand-200/40 dark:bg-brand-900/20 rounded-full blur-3xl mix-blend-multiply animate-blob animation-delay-4000">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-gray-800 text-brand-700 dark:text-brand-300 text-sm font-semibold mb-8 border border-brand-100 dark:border-gray-700 shadow-sm">
+                <span class="flex h-2 w-2 rounded-full bg-secondary"></span>
+                La plataforma de evolución profesional
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-text dark:text-white mb-8 leading-tight">
+                Acelera tu carrera como <br>
+                <span
+                    class="bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-blue-600 to-secondary animate-gradient-x">Desarrollador
+                    Fullstack</span>
+            </h1>
+
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                Gestiona tu aprendizaje, crea un portfolio impactante y mide tu crecimiento real.
+                <span class="font-semibold text-blue-600 dark:text-blue-400">GrowUp</span> está diseñado para impulsarte
+                al siguiente nivel.
+            </p>
+
+            <div class="mt-12 flex flex-col sm:flex-row justify-center gap-4">
+                <a routerLink="/auth/register"
+                    class="px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-secondary to-orange-500 hover:to-orange-400 rounded-xl shadow-xl shadow-orange-500/20 hover:shadow-2xl hover:-translate-y-1 transition-all duration-200 flex items-center justify-center gap-2">
+                    Comenzar Gratis
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#features"
+                    class="px-8 py-4 text-lg font-bold text-text dark:text-gray-200 bg-white dark:bg-gray-800 border-2 border-gray-100 dark:border-gray-700 rounded-xl hover:border-blue-200 dark:hover:border-blue-700 hover:bg-blue-50/50 dark:hover:bg-gray-700/50 transition-all duration-200">
+                    Saber más
+                </a>
+            </div>
+
+            <!-- Tech Stack Badges -->
+            <div
+                class="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-red-500"></span>
+                    <span class="font-bold text-gray-500">Angular 19</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-blue-400"></span>
+                    <span class="font-bold text-gray-500">Tailwind 4</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="h-2 w-2 rounded-full bg-green-500"></span>
+                    <span class="font-bold text-gray-500">Spring Boot</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-24 bg-surface dark:bg-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold text-blue-600 tracking-widest uppercase mb-3">Características Principales
+                </h2>
+                <p class="text-3xl md:text-4xl font-extrabold text-text dark:text-white">
+                    Todo lo que necesitas para <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-brand-500 to-blue-500">crecer</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 (Green/Brand) -->
+                <div
+                    class="group p-8 bg-white dark:bg-gray-700 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-brand-500/10 border border-gray-100 dark:border-gray-600 transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="h-14 w-14 bg-brand-100 dark:bg-brand-900/50 rounded-2xl flex items-center justify-center mb-6 text-brand-600 dark:text-brand-400 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-brand-200 dark:border-brand-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-text dark:text-white mb-3">Aprendizaje Estructurado</h3>
+                    <p class="text-gray-500 dark:text-gray-300 leading-relaxed">Accede a una ruta formativa clara, con
+                        módulos teóricos y prácticos diseñados para el mercado actual.</p>
+                </div>
+
+                <!-- Feature 2 (Blue) -->
+                <div
+                    class="group p-8 bg-white dark:bg-gray-700 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-blue-500/10 border border-gray-100 dark:border-gray-600 transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="h-14 w-14 bg-blue-100 dark:bg-blue-900/50 rounded-2xl flex items-center justify-center mb-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-blue-200 dark:border-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-text dark:text-white mb-3">Métricas de Progreso</h3>
+                    <p class="text-gray-500 dark:text-gray-300 leading-relaxed">Visualiza tu evolución en tiempo real.
+                        Gana medallas, supera hitos y mantén la motivación alta.</p>
+                </div>
+
+                <!-- Feature 3 (Orange/Secondary) -->
+                <div
+                    class="group p-8 bg-white dark:bg-gray-700 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-orange-500/10 border border-gray-100 dark:border-gray-600 transition-all duration-300 hover:-translate-y-1">
+                    <div
+                        class="h-14 w-14 bg-orange-100 dark:bg-orange-900/50 rounded-2xl flex items-center justify-center mb-6 text-secondary dark:text-orange-400 group-hover:scale-110 transition-transform duration-300 shadow-sm border border-orange-200 dark:border-orange-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-text dark:text-white mb-3">Portfolio Profesional</h3>
+                    <p class="text-gray-500 dark:text-gray-300 leading-relaxed">Construye un escaparate digital de tus
+                        mejores proyectos, listo para compartir con reclutadores.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-bg dark:bg-gray-900 border-t border-brand-100 dark:border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-2 mb-4 md:mb-0">
+                <img src="assets/flecha-logo.png" alt="GrowUp Logo"
+                    class="h-6 w-auto grayscale opacity-50 hover:grayscale-0 transition-all duration-300">
+                <p class="text-gray-500 dark:text-gray-400 text-sm">© 2025 GrowUp. Todos los derechos reservados.</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors"><span
+                        class="sr-only">GitHub</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0122 12.017C22 6.484 17.522 2 12 2z"
+                            clip-rule="evenodd" />
+                    </svg></a>
+            </div>
+        </div>
+    </footer>
+</div>

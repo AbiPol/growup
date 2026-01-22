@@ -1,0 +1,137 @@
+<main class="bg-gray-50 dark:bg-gray-900 min-h-screen px-4 py-8 md:px-6 lg:px-8">
+    <div class="grid grid-cols-12 gap-6">
+
+        <!-- Header & Stats Section -->
+        <header class="col-span-12 mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Hola de nuevo! 👋</h1>
+
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stat 1: Cursos Activos -->
+                <article class="h-full">
+                    <growup-stat-card title="Cursos Activos" [value]="stats?.activeCoursesCount || 0" icon="pi-book"
+                        iconBgColor="bg-blue-100" iconColor="text-blue-600" footerValue="+2 nuevos"
+                        footerText="esta semana">
+                    </growup-stat-card>
+                </article>
+
+                <!-- Stat 2: Completados -->
+                <article class="h-full">
+                    <growup-stat-card title="Completados" [value]="stats?.completedCoursesCount || 0"
+                        icon="pi-check-circle" iconBgColor="bg-green-100" iconColor="text-green-600"
+                        footerText="¡Sigue así!">
+                    </growup-stat-card>
+                </article>
+
+                <!-- Stat 3: Horas Totales -->
+                <article class="h-full">
+                    <growup-stat-card title="Horas Totales" [value]="(stats?.totalHoursLearning || 0) + 'h'"
+                        icon="pi-clock" iconBgColor="bg-orange-100" iconColor="text-orange-600"
+                        footerText="de dedicación">
+                    </growup-stat-card>
+                </article>
+
+                <!-- Stat 4: Certificados -->
+                <article class="h-full">
+                    <growup-stat-card title="Certificados" [value]="stats?.certificatesEarned || 0" icon="pi-verified"
+                        iconBgColor="bg-purple-100" iconColor="text-purple-600" footerText="acreditados">
+                    </growup-stat-card>
+                </article>
+            </section>
+        </header>
+
+        <!-- Main Column -->
+        <section class="col-span-12 xl:col-span-8 space-y-6">
+
+            <!-- Activity Chart -->
+            <article
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-transparent dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Actividad de Aprendizaje</h2>
+                <p-chart type="bar" [data]="activityChartData" [options]="activityChartOptions"
+                    height="300px"></p-chart>
+            </article>
+
+            <!-- Active Courses List Refactored -->
+            <article
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-transparent dark:border-gray-700">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white m-0">Mis Estudios</h2>
+                    <p-button icon="pi pi-arrow-right" label="    Ver todos los cursos" [text]="true"
+                        [routerLink]="['/private/student/mylearning']"
+                        styleClass="cursor-pointer font-bold text-orange-600 hover:text-orange-700"></p-button>
+                </div>
+
+                <growup-course-group title="En curso" [courses]="activeCourses()"
+                    emptyMessage="No tienes cursos activos en este momento.">
+                </growup-course-group>
+            </article>
+        </section>
+
+        <!-- Right Column (Sidebar) -->
+        <aside class="col-span-12 xl:col-span-4 space-y-6">
+
+            <!-- Notifications -->
+            <article
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-transparent dark:border-gray-700">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-900 dark:text-white m-0">Notificaciones</h2>
+                    <span
+                        class="flex items-center justify-center bg-gray-100 rounded-full w-6 h-6 text-xs font-bold text-gray-600">
+                        {{ notifications.length }}
+                    </span>
+                </div>
+
+                <ul class="list-none p-0 m-0 space-y-4">
+                    @for (notification of notifications; track notification.id) {
+                    <li
+                        class="flex items-start pb-4 border-b border-gray-100 dark:border-gray-700 last:border-0 last:pb-0">
+                        <!-- Icono -->
+                        <div class="flex items-center justify-center rounded-full w-10 h-10 shrink-0 mr-3" [ngClass]="{
+                                    'bg-blue-50 text-blue-600': notification.type === 'info', 
+                                    'bg-green-50 text-green-600': notification.type === 'success',
+                                    'bg-orange-50 text-orange-600': notification.type === 'warning',
+                                    'bg-red-50 text-red-600': notification.type === 'error'
+                                 }">
+                            <i class="pi text-lg" [ngClass]="{
+                                      'pi-info-circle': notification.type === 'info',
+                                      'pi-check-circle': notification.type === 'success',
+                                      'pi-exclamation-triangle': notification.type === 'warning',
+                                      'pi-times-circle': notification.type === 'error'
+                                   }"></i>
+                        </div>
+
+                        <!-- Contenido -->
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900 dark:text-white text-sm mb-1 m-0">{{ notification.title
+                                }}</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-300 mb-1 leading-relaxed m-0">{{
+                                notification.message }}</p>
+                            <span class="text-xs text-gray-400 dark:text-gray-400">{{ notification.date | date:'short'
+                                }}</span>
+                        </div>
+
+                        <!-- Indicator Not Read -->
+                        @if (!notification.read) {
+                        <span class="w-2 h-2 rounded-full bg-blue-500 mt-2"></span>
+                        }
+                    </li>
+                    } @empty {
+                    <li class="py-4 text-center text-gray-500 dark:text-gray-400 text-sm">Todo al día. No tienes
+                        notificaciones nuevas.
+                    </li>
+                    }
+                </ul>
+            </article>
+
+            <!-- Completion Chart -->
+            <article
+                class="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 border border-transparent dark:border-gray-700">
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Tu Progreso General</h2>
+                <div class="flex justify-center p-4">
+                    <p-chart type="doughnut" [data]="completionChartData" [options]="completionChartOptions"
+                        styleClass="w-full !h-48"></p-chart>
+                </div>
+            </article>
+        </aside>
+
+    </div>
+</main>
