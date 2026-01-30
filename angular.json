@@ -98,6 +98,12 @@
                 "glob": "**/*",
                 "input": "projects/student/public"
               }
+              ,
+              {
+                "glob": "**/*",
+                "input": "shared/styles",
+                "output": "shared/styles"
+              }
             ],
             "styles": [
               "projects/student/src/styles.scss"

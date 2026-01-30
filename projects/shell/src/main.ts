@@ -1,6 +1,9 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
+import { initFederation } from '@angular-architects/native-federation';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+initFederation({
+  'student': 'http://localhost:4201/remoteEntry.json',
+  'teacher': 'http://localhost:4202/remoteEntry.json'
+})
+  .catch(err => console.error('Error inicializando federación:', err))
+  .finally(() => import('./bootstrap'))
+  .catch(err => console.error(err));

@@ -1,0 +1,11 @@
+{
+    "name": "teacher",
+    "remotes": [],
+    "shared": [],
+    "exposes": [
+        {
+            "key": "./Component",
+            "outFileName": "./remoteEntry.js"
+        }
+    ]
+}

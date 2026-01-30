@@ -10,8 +10,8 @@ import { Role } from '../models/role.enum';
 })
 export class AuthService {
 
-  //userPrueba = { id: '2', name: 'Student', email: 'student@gmail.com', isActive: true, role: Role.STUDENT }
-  userPrueba = { id: '1', name: 'Teacher', email: 'teacher@gmail.com', isActive: true, role: Role.TEACHER }
+  userPrueba = { id: '2', name: 'Student', email: 'student@gmail.com', isActive: true, role: Role.STUDENT }
+  //userPrueba = { id: '1', name: 'Teacher', email: 'teacher@gmail.com', isActive: true, role: Role.TEACHER }
   //userPrueba = { id: '3', name: 'Admin', email: 'admin@gmail.com', isActive: true, role: Role.ADMIN }
   private _statusUser = signal<AuthStatus>(AuthStatus.authenticated);
   private _user = signal<User | null>(null);
@@ -61,7 +61,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<boolean> {
     //console.log('login');
-    return of(this.handleAuthSuccess({ token: 'teacher-token', user: this.userPrueba }));
+    return of(this.handleAuthSuccess({ token: 'user-token', user: this.userPrueba }));
   }
 
   logout() {

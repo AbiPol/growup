@@ -1,26 +1,25 @@
-<main
-    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-brand-50 font-sans px-4">
-    <section class="w-full max-w-md bg-surface p-8 rounded-xl shadow-lg border border-blue-100">
+<main class="min-h-screen flex items-center justify-center bg-bg font-sans px-4 transition-colors duration-300">
+    <section class="w-full max-w-md bg-surface p-8 rounded-xl shadow-lg border border-blue-100 dark:border-gray-800">
         <header class="text-center mb-8">
             <a routerLink="/">
                 <h1 class="text-3xl font-display font-bold text-grow mb-2">GrowUp</h1>
             </a>
-            <p class="text-gray-600">Bienvenido de nuevo</p>
+            <p class="text-text/70">Bienvenido de nuevo</p>
         </header>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
             <div class="flex flex-col gap-2">
-                <label for="email" class="font-medium text-blue-900">Email</label>
+                <label for="email" class="font-medium text-grow dark:text-blue-200">Email</label>
                 <input pInputText id="email" formControlName="email"
                     class="w-full focus:border-secondary focus:ring-secondary" aria-describedby="email-help" />
-                <small id="email-help" class="text-gray-500">Introduce tu email.</small>
+                <small id="email-help" class="text-text/50">Introduce tu email.</small>
             </div>
             @if (hasError()) {
             <small class="text-red-500">El nombre de usuario es obligatorio.</small>
             }
 
             <div class="flex flex-col gap-2">
-                <label for="password" class="font-medium text-blue-900">Contraseña</label>
+                <label for="password" class="font-medium text-grow dark:text-blue-200">Contraseña</label>
                 <p-password formControlName="password" [toggleMask]="true" [feedback]="false" class="w-full"
                     inputStyleClass="w-full focus:border-secondary focus:ring-secondary" placeholder="••••••••">
                 </p-password>
@@ -35,7 +34,9 @@
         </form>
 
         <footer class="mt-6 text-center">
-            <a href="#" class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">¿Olvidaste tu
+            <a href="#"
+                class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">¿Olvidaste
+                tu
                 contraseña?</a>
         </footer>
     </section>
