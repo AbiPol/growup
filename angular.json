@@ -25,14 +25,21 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/shell/src/assets",
+              "projects/shell/src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "projects/shell/public"
+              },
+              {
+                "glob": "**/*.{woff,woff2,ttf,eot}",
+                "input": "projects/teacher/node_modules/primereact/resources/themes/lara-light-blue/fonts",
+                "output": "/fonts"
               }
             ],
             "styles": [
               "projects/shell/src/styles.scss"
-            ]
+            ],
+            "serviceWorker": "projects/shell/src/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -97,8 +104,7 @@
               {
                 "glob": "**/*",
                 "input": "projects/student/public"
-              }
-              ,
+              },
               {
                 "glob": "**/*",
                 "input": "shared/styles",

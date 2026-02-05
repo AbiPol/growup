@@ -6,7 +6,7 @@ import { mount } from '@teacher/main';
 import 'react';
 import 'react-dom';
 import 'react-router-dom';
-import 'primereact/api';
+// import 'primereact/api'; // ← Comentado: causa errores con fuentes .woff2 en build de producción
 
 @Component({
     selector: 'app-react-bridge',
