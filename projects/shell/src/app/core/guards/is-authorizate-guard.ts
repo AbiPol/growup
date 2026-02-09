@@ -1,6 +1,6 @@
 import { CanMatchFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
-import { AuthStatus } from '../models/auth-status.enum';
+import { AuthStatus } from '@shared/models/auth-status.enum';
 import { inject } from '@angular/core';
 
 export const isAuthorizateGuard: CanMatchFn = (route, segments) => {

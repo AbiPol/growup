@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
-import { filter, map } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 /**
  * Servicio para gestionar las actualizaciones de la PWA

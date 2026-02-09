@@ -1,0 +1,8 @@
+{
+    "remoteEntry.js": {
+        "remoteEntry.js": {
+            "entry": "./remoteEntry.js",
+            "type": "module"
+        }
+    }
+}

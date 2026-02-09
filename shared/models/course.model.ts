@@ -35,4 +35,5 @@ export interface CourseModel {
     deletedAt?: Date | string | null;
     instructor?: InstructorModel;
     syllabus?: SyllabusModel[];
+    enrolledCount?: number;
 }

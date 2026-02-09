@@ -1,3 +1,5 @@
+import { initFederation } from '@angular-architects/native-federation';
+
 // Si el host (shell) ya ha cargado Tailwind, no inyectamos el stylesheet.
 if (!(window as any).__GROWUP_TAILWIND_LOADED) {
 	const existing = document.getElementById('growup-tailwind');
@@ -10,4 +12,7 @@ if (!(window as any).__GROWUP_TAILWIND_LOADED) {
 	}
 }
 
-import('./bootstrap').catch(err => console.error(err));
+initFederation()
+	.catch(err => console.error(err))
+	.then(_ => import('./bootstrap'))
+	.catch(err => console.error(err));

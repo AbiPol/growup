@@ -1,0 +1,183 @@
+<main class="p-6 space-y-8 animate-fade-in">
+    <!-- Header -->
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+            <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                Dashboard <span class="text-brand-500">Admin</span>
+            </h1>
+            <p class="text-gray-500 dark:text-gray-400 font-medium">Bienvenido de nuevo. Aquí tienes un resumen de la
+                plataforma.</p>
+        </div>
+        <div class="flex gap-2">
+            <button pButton label="Descargar Reporte" icon="pi pi-download"
+                class="p-button-outlined p-button-secondary rounded-xl font-bold"></button>
+            <button pButton label="Nuevo Aviso" icon="pi pi-bell"
+                class="p-button-primary rounded-xl font-bold"></button>
+        </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" aria-label="Estadísticas rápidas">
+        <!-- Estudiantes -->
+        <article
+            class="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all group overflow-hidden relative">
+            <div
+                class="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/5 rounded-full group-hover:scale-150 transition-transform">
+            </div>
+            <div class="flex flex-col gap-4 relative z-10">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                    <i class="pi pi-users text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Estudiantes
+                    </p>
+                    <h2 class="text-3xl font-black text-gray-900 dark:text-white">{{ stats().students }}</h2>
+                    <p class="text-xs font-bold text-green-500 mt-1 flex items-center gap-1">
+                        <i class="pi pi-arrow-up text-[10px]"></i> +12% este mes
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Formadores -->
+        <article
+            class="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all group overflow-hidden relative">
+            <div
+                class="absolute -right-4 -bottom-4 w-24 h-24 bg-orange-500/5 rounded-full group-hover:scale-150 transition-transform">
+            </div>
+            <div class="flex flex-col gap-4 relative z-10">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-orange-50 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+                    <i class="pi pi-id-card text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Formadores
+                    </p>
+                    <h2 class="text-3xl font-black text-gray-900 dark:text-white">{{ stats().trainers }}</h2>
+                    <p class="text-xs font-bold text-blue-500 mt-1 flex items-center gap-1">
+                        <i class="pi pi-check-circle text-[10px]"></i> 5 pendientes
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Cursos Activos -->
+        <article
+            class="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all group overflow-hidden relative">
+            <div
+                class="absolute -right-4 -bottom-4 w-24 h-24 bg-brand-500/5 rounded-full group-hover:scale-150 transition-transform">
+            </div>
+            <div class="flex flex-col gap-4 relative z-10">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center text-brand-600 dark:text-brand-400">
+                    <i class="pi pi-book text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Cursos</p>
+                    <h2 class="text-3xl font-black text-gray-900 dark:text-white">{{ stats().activeCourses }}</h2>
+                    <p class="text-xs font-bold text-orange-500 mt-1 flex items-center gap-1">
+                        <i class="pi pi-exclamation-circle text-[10px]"></i> 12 por aprobar
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Facturación -->
+        <article
+            class="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all group overflow-hidden relative">
+            <div
+                class="absolute -right-4 -bottom-4 w-24 h-24 bg-purple-500/5 rounded-full group-hover:scale-150 transition-transform">
+            </div>
+            <div class="flex flex-col gap-4 relative z-10">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                    <i class="pi pi-wallet text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-bold text-gray-400 uppercase tracking-widest leading-none mb-2">Ventas Mes
+                    </p>
+                    <h2 class="text-3xl font-black text-gray-900 dark:text-white">{{ stats().monthlyRevenue }}</h2>
+                    <p class="text-xs font-bold text-green-500 mt-1 flex items-center gap-1">
+                        <i class="pi pi-arrow-up text-[10px]"></i> +5.4% vs prev.
+                    </p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8" aria-label="Visualización de datos">
+        <article
+            class="bg-white dark:bg-gray-800 p-8 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm">
+            <header class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white italic">Crecimiento de Usuarios</h3>
+                <span
+                    class="text-xs font-bold bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-gray-500 uppercase">Últimos
+                    6 meses</span>
+            </header>
+            <p-chart type="line" [data]="growthData" [options]="growthOptions" height="300px"></p-chart>
+        </article>
+
+        <article
+            class="bg-white dark:bg-gray-800 p-8 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm">
+            <header class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white italic">Distribución de Alumnos</h3>
+                <span
+                    class="text-xs font-bold bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-gray-500 uppercase">Por
+                    Categoría</span>
+            </header>
+            <p-chart type="doughnut" [data]="distributionData" [options]="distributionOptions" height="300px"></p-chart>
+        </article>
+    </section>
+
+    <!-- Recent Proposals Table -->
+    <section class="bg-white dark:bg-gray-800 rounded-[2rem] p-8 border border-gray-100 dark:border-gray-700 shadow-sm"
+        aria-labelledby="pending-courses-title">
+        <header class="flex justify-between items-center mb-8">
+            <h3 id="pending-courses-title" class="text-2xl font-black text-gray-900 dark:text-white italic">Cursos
+                Pendientes de Aprobación</h3>
+            <button pButton label="Ver todos" class="p-button-text font-bold text-brand-500"></button>
+        </header>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead>
+                    <tr
+                        class="text-gray-400 text-xs font-bold uppercase tracking-widest border-b border-gray-50 dark:border-gray-700">
+                        <th class="pb-4">Curso</th>
+                        <th class="pb-4">Formador</th>
+                        <th class="pb-4">Fecha</th>
+                        <th class="pb-4 text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-50 dark:divide-gray-700">
+                    @for (course of pendingCourses(); track course.id) {
+                    <tr class="group hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors">
+                        <td class="py-4">
+                            <article class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-900/20 flex items-center justify-center text-brand-600">
+                                    <i class="pi pi-book"></i>
+                                </div>
+                                <span class="font-bold text-gray-900 dark:text-white">{{ course.name }}</span>
+                            </article>
+                        </td>
+                        <td class="py-4 text-gray-500 dark:text-gray-400 font-medium">{{ course.instructor.name }}</td>
+                        <td class="py-4 text-brand-600 dark:text-brand-400 font-black text-sm">{{ course.price |
+                            currency:'EUR' }}</td>
+                        <td class="py-4 flex items-center justify-center">
+                            <button pButton icon="pi pi-eye" class="p-button-rounded p-button-secondary p-button-text"
+                                (click)="showPreview(course)" pTooltip="Previsualizar"></button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Shared Preview & Approval Dialog -->
+    <growup-course-preview-dialog [course]="selectedCourse()" [visible]="displayDetails()"
+        (onClose)="displayDetails.set(false)" />
+</main>

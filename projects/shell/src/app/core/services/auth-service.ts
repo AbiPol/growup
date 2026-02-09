@@ -1,18 +1,18 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
-import { AuthStatus } from '../models/auth-status.enum';
-import { User } from '../interfaces/user';
+import { AuthStatus } from '@shared/models/auth-status.enum';
+import { User } from '@shared/interfaces/user.interface';
 import { Observable, of } from 'rxjs';
 import { AuthResponse } from '../interfaces/auth-response.authResponse';
-import { Role } from '../models/role.enum';
+import { Role } from '@shared/models/role.enum';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  userPrueba = { id: '2', name: 'Student', email: 'student@gmail.com', isActive: true, role: Role.STUDENT }
+  //userPrueba = { id: '2', name: 'Student', email: 'student@gmail.com', isActive: true, role: Role.STUDENT }
   //userPrueba = { id: '1', name: 'Teacher', email: 'teacher@gmail.com', isActive: true, role: Role.TEACHER }
-  //userPrueba = { id: '3', name: 'Admin', email: 'admin@gmail.com', isActive: true, role: Role.ADMIN }
+  userPrueba = { id: '3', name: 'Admin', email: 'admin@gmail.com', isActive: true, role: Role.ADMIN }
   private _statusUser = signal<AuthStatus>(AuthStatus.authenticated);
   private _user = signal<User | null>(null);
   private _token = signal<string | null>(localStorage.getItem('growup-token') || '');

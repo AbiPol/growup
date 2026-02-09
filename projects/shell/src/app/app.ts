@@ -6,7 +6,7 @@ import { InstallBannerComponent } from './shared/components/install-banner.compo
 
 
 @Component({
-  selector: 'app-root',
+  selector: 'growup-root',
   imports: [
     RouterModule,
     InstallBannerComponent,
@@ -17,13 +17,15 @@ import { InstallBannerComponent } from './shared/components/install-banner.compo
 })
 export class App {
   protected readonly title = signal('growup-frontend');
+  //private pwaUpdate = inject(PwaUpdateService);
 
-  // Inyectamos el servicio de actualización PWA
-  private pwaUpdate = inject(PwaUpdateService);
-  // ↑ Al inyectarlo aquí, el servicio se inicializa automáticamente
-  //   y comienza a escuchar actualizaciones en segundo plano
-  //   No necesitamos hacer nada más, el servicio trabaja solo
+  constructor() {
+    console.log('--- GROWUP PWA INITIALIZED ---');
 
-
-
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.ready.then(reg => {
+        console.log('PWA Service Worker is ready and active');
+      });
+    }
+  }
 }

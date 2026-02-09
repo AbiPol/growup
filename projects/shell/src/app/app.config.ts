@@ -4,7 +4,8 @@ import { provideZonelessChangeDetection } from '@angular/core';
 
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import Aura from '@primeng/themes/aura';
 import { MessageService } from 'primeng/api';
 import { provideServiceWorker } from '@angular/service-worker';
 
@@ -15,15 +16,20 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideAnimations(),
+    provideAnimationsAsync(),
     providePrimeNG({
-      unstyled: true,
-      ripple: true
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: '.dark',
+          ripple: true
+        }
+      }
     }),
     MessageService,
     provideServiceWorker('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000'
+      enabled: true, // Forzar habilitado para pruebas
+      registrationStrategy: 'registerImmediately'
     })
   ]
 };

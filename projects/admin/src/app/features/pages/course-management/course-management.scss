@@ -1,0 +1,74 @@
+:host {
+    display: block;
+}
+
+.course-management-page {
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Custom PrimeNG Table Overrides */
+    ::ng-deep {
+        .p-datatable {
+            background: transparent;
+
+            .p-datatable-thead>tr>th {
+                background: transparent;
+                border: none;
+                color: var(--color-gray-400);
+            }
+
+            .p-datatable-tbody>tr {
+                background: transparent;
+                border-bottom: 1px solid color-mix(in srgb, var(--color-gray-100), transparent 50%);
+
+                .dark & {
+                    border-bottom-color: color-mix(in srgb, var(--color-gray-700), transparent 50%);
+                }
+            }
+
+            .p-paginator {
+                background: transparent;
+                border: none;
+                padding: 1.5rem;
+
+                .p-paginator-pages .p-paginator-page {
+                    border-radius: 0.75rem;
+
+                    &.p-highlight {
+                        background: var(--color-brand-500);
+                        color: white !important;
+                    }
+                }
+            }
+        }
+
+        .p-dialog {
+            .p-dialog-header {
+                padding: 2rem 2rem 1rem 2rem;
+                border: none;
+                background: transparent;
+
+                .p-dialog-title {
+                    font-weight: 900;
+                    letter-spacing: -0.025em;
+                }
+            }
+
+            .p-dialog-content {
+                padding: 1rem 2rem 2rem 2rem;
+                background: transparent;
+            }
+        }
+    }
+}

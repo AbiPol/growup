@@ -10,6 +10,15 @@
       ],
       "@shared/*": [
         "shared/*"
+      ],
+      "@shared/models/*": [
+        "shared/models/*"
+      ],
+      "@shared/interfaces/*": [
+        "shared/interfaces/*"
+      ],
+      "@admin/*": [
+        "projects/admin/src/*"
       ]
     },
     "skipLibCheck": true,
@@ -36,6 +45,12 @@
     },
     {
       "path": "./projects/student/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/admin/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/admin/tsconfig.spec.json"
     }
   ]
 }

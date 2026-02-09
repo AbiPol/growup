@@ -40,6 +40,10 @@ export const routes: Routes = [
         loadChildren: () => import('./utils/student.routes').then(c => c.studentRoutes)
       },
       {
+        path: 'admin',
+        loadChildren: () => import('./utils/admin.routes').then((m) => m.adminRoutes),
+      },
+      {
         path: 'teacher',
         loadChildren: () => import('./utils/teacher.routes').then(c => c.teacherRoutes)
       },

@@ -5,11 +5,28 @@ import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 
 // https://vite.dev/config/
+import federation from '@originjs/vite-plugin-federation'
+
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    federation({
+      name: 'teacher',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './mount': './src/bootstrap.tsx'
+      },
+      shared: ['react', 'react-dom']
+    })
   ],
+  build: {
+    modulePreload: false,
+    target: 'esnext',
+    minify: false,
+    cssCodeSplit: false
+  },
   resolve: {
     alias: {
       '@shared': resolve(__dirname, '../../shared'),

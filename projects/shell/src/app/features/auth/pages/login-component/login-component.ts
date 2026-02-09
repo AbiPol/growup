@@ -6,7 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { FormUtils } from '../../../../utils/forms.utils';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth-service';
-import { Role } from '../../../../core/models/role.enum';
+import { Role } from '@shared/models/role.enum';
 
 @Component({
   selector: 'growup-login-component',

@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'app-root',
+  selector: 'growup-student',
   imports: [
     RouterModule,
   ],

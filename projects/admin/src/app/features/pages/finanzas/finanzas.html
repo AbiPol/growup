@@ -1,0 +1,189 @@
+<main class="responsive-layout p-6 space-y-8 animate-fade-in">
+
+    <!-- Header -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+        <div>
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-3">
+                <i class="pi pi-wallet text-brand-500 text-2xl"></i>
+                Facturación y Contabilidad
+            </h1>
+            <p class="text-gray-500 dark:text-gray-400 font-medium mt-1">Gestión de ingresos, comisiones y pagos a
+                instructores.</p>
+        </div>
+        <div class="flex gap-2">
+            <button pButton label="Descargar Informe" icon="pi pi-download"
+                class="p-button-outlined p-button-secondary rounded-xl font-bold"></button>
+            <button pButton label="Configuración" icon="pi pi-cog"
+                class="p-button-text p-button-secondary rounded-xl"></button>
+        </div>
+    </header>
+
+    <!-- Financial Stats Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6" aria-label="Resumen Financiero">
+        <!-- Total Revenue -->
+        <article
+            class="bg-white dark:bg-gray-800 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden group">
+            <div class="relative z-10">
+                <p class="text-gray-500 dark:text-gray-400 font-bold text-xs uppercase tracking-widest mb-1">Volumen
+                    Bruto</p>
+                <h3 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight">
+                    {{ accountingService.stats().totalRevenue | currency:'EUR' }}
+                </h3>
+                <div class="flex items-center gap-2 mt-3">
+                    <span
+                        class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 px-2 py-1 rounded-lg text-xs font-bold flex items-center gap-1">
+                        <i class="pi pi-arrow-up text-[10px]"></i> 12%
+                    </span>
+                    <span class="text-gray-400 text-xs font-medium">vs mes anterior</span>
+                </div>
+            </div>
+            <div
+                class="absolute right-0 bottom-0 w-24 h-24 bg-brand-50 dark:bg-brand-900/10 rounded-full translate-x-8 translate-y-8 group-hover:scale-110 transition-transform">
+            </div>
+            <i class="pi pi-dollar absolute right-6 top-6 text-brand-200 dark:text-brand-900/40 text-4xl"></i>
+        </article>
+
+        <!-- Net Profit -->
+        <article
+            class="bg-white dark:bg-gray-800 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden group">
+            <div class="relative z-10">
+                <p class="text-gray-500 dark:text-gray-400 font-bold text-xs uppercase tracking-widest mb-1">Beneficio
+                    Neto (20%)</p>
+                <h3 class="text-3xl font-black text-brand-600 dark:text-brand-400 tracking-tight">
+                    {{ accountingService.stats().platformProfit | currency:'EUR' }}
+                </h3>
+            </div>
+            <div
+                class="absolute right-0 bottom-0 w-24 h-24 bg-green-50 dark:bg-green-900/10 rounded-full translate-x-8 translate-y-8 group-hover:scale-110 transition-transform">
+            </div>
+            <i class="pi pi-chart-line absolute right-6 top-6 text-green-200 dark:text-green-900/40 text-4xl"></i>
+        </article>
+
+        <!-- Pending Payouts -->
+        <article
+            class="bg-white dark:bg-gray-800 rounded-[2rem] p-6 border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden group">
+            <div class="relative z-10">
+                <p class="text-gray-500 dark:text-gray-400 font-bold text-xs uppercase tracking-widest mb-1">Pagos
+                    Pendientes</p>
+                <h3 class="text-3xl font-black text-orange-500 tracking-tight">
+                    {{ accountingService.stats().pendingPayouts | currency:'EUR' }}
+                </h3>
+                <div class="mt-3">
+                    <button pButton label="Procesar Pagos"
+                        class="p-button-warning p-button-sm rounded-lg font-bold text-xs w-full"></button>
+                </div>
+            </div>
+            <div
+                class="absolute right-0 bottom-0 w-24 h-24 bg-orange-50 dark:bg-orange-900/10 rounded-full translate-x-8 translate-y-8 group-hover:scale-110 transition-transform">
+            </div>
+            <i class="pi pi-clock absolute right-6 top-6 text-orange-200 dark:text-orange-900/40 text-4xl"></i>
+        </article>
+    </section>
+
+    <!-- Content Tabs -->
+    <section
+        class="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden"
+        aria-label="Detalle de Finanzas">
+        <p-tabs value="0">
+            <p-tablist class="px-8 pt-6 border-b border-gray-100 dark:border-gray-700">
+                <p-tab value="0" class="flex items-center gap-3 py-4">
+                    <i class="pi pi-list text-lg"></i>
+                    <span class="font-bold">Transacciones</span>
+                </p-tab>
+                <p-tab value="1" class="flex items-center gap-3 py-4">
+                    <i class="pi pi-money-bill text-lg"></i>
+                    <span class="font-bold">Liquidaciones</span>
+                </p-tab>
+            </p-tablist>
+
+            <p-tabpanels class="p-0">
+                <!-- Transactions Tab -->
+                <p-tabpanel value="0">
+                    <p-table [value]="accountingService.transactions()" [rows]="10" [paginator]="true"
+                        responsiveLayout="scroll" class="p-datatable-lg">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="pl-8 py-5 text-gray-400 font-bold uppercase text-xs tracking-wider">ID</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider">Estudiante
+                                </th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider">Curso</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider">Fecha</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-right">
+                                    Monto</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-right">
+                                    Comisión</th>
+                                <th
+                                    class="pr-8 py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-right">
+                                    Ganancia Profesor</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-tx>
+                            <tr
+                                class="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors border-b border-gray-50 dark:border-gray-700 last:border-0">
+                                <td class="pl-8 py-4 font-mono text-xs text-gray-400">{{ tx.id }}</td>
+                                <td class="py-4 font-bold text-gray-900 dark:text-white">{{ tx.studentName }}</td>
+                                <td class="py-4 text-sm text-gray-600 dark:text-gray-300">{{ tx.courseName }}</td>
+                                <td class="py-4 text-sm text-gray-500">{{ tx.date | date:'mediumDate' }}</td>
+                                <td class="py-4 text-right font-bold text-gray-900 dark:text-white">{{ tx.amount |
+                                    currency:'EUR' }}</td>
+                                <td class="py-4 text-right font-bold text-green-600 text-sm">+{{ tx.platformFee |
+                                    currency:'EUR' }}</td>
+                                <td class="pr-8 py-4 text-center font-bold text-gray-500 text-sm">{{ tx.teacherEarnings
+                                    | currency:'EUR' }}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabpanel>
+
+                <!-- Payouts Tab -->
+                <p-tabpanel value="1">
+                    <p-table [value]="accountingService.payouts()" [rows]="10" [paginator]="true"
+                        responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="pl-8 py-5 text-gray-400 font-bold uppercase text-xs tracking-wider">
+                                    Instructor</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-center">
+                                    Estado</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-right">
+                                    Total Pagado</th>
+                                <th class="py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-right">
+                                    Pendiente</th>
+                                <th
+                                    class="pr-8 py-5 text-gray-400 font-bold uppercase text-xs tracking-wider text-center">
+                                    Acciones</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-payout>
+                            <tr
+                                class="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors border-b border-gray-50 dark:border-gray-700 last:border-0">
+                                <td class="pl-8 py-4">
+                                    <span class="font-bold text-gray-900 dark:text-white block">{{ payout.teacherName
+                                        }}</span>
+                                    <span class="text-xs text-gray-400 font-mono">{{ payout.teacherId }}</span>
+                                </td>
+                                <td class="py-4 text-center">
+                                    <p-tag [value]="payout.pendingAmount > 0 ? 'Pendiente' : 'Al día'"
+                                        [severity]="payout.pendingAmount > 0 ? 'warn' : 'success'"
+                                        class="rounded-full px-3 text-[10px] font-bold uppercase" />
+                                </td>
+                                <td class="py-4 text-right font-bold text-gray-500">{{ payout.totalPaid | currency:'EUR'
+                                    }}</td>
+                                <td class="py-4 text-right">
+                                    <span class="text-xl font-black text-gray-900 dark:text-white block">{{
+                                        payout.pendingAmount | currency:'EUR' }}</span>
+                                </td>
+                                <td class="pr-8 py-4 text-center">
+                                    <button pButton label="Liquidar" icon="pi pi-check-circle"
+                                        class="p-button-outlined p-button-sm rounded-xl font-bold"
+                                        [disabled]="payout.pendingAmount === 0"
+                                        (click)="processPayout(payout.id)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabpanel>
+            </p-tabpanels>
+        </p-tabs>
+    </section>
+</main>

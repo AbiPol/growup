@@ -4,7 +4,7 @@ import { AuthService } from '../../core/services/auth-service';
 import { NavigationService } from '../../core/services/navigation.service';
 import { ThemeService } from '../../core/services/theme.service';
 import { MenuItem } from '../../core/interfaces/general.interface';
-import { Role } from '../../core/models/role.enum';
+import { Role } from '@shared/models/role.enum';
 
 @Component({
   selector: 'growup-sidebar',

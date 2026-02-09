@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { mount } from '@teacher/main';
+import { mount } from '@teacher/bootstrap';
 // Forzar a Vite a incluir estas dependencias en el bundle de Angular
 import 'react';
 import 'react-dom';
@@ -9,7 +9,7 @@ import 'react-router-dom';
 // import 'primereact/api'; // ← Comentado: causa errores con fuentes .woff2 en build de producción
 
 @Component({
-    selector: 'app-react-bridge',
+    selector: 'growup-react-bridge',
     standalone: true,
     template: '<div #reactContainer class="react-container"></div>',
     styles: [`

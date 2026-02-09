@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateChildFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
-import { Role } from '../models/role.enum';
+import { Role } from '@shared/models/role.enum';
 
 export const roleRedirectGuard: CanActivateChildFn = (childRoute, state) => {
 
@@ -27,8 +27,9 @@ export const roleRedirectGuard: CanActivateChildFn = (childRoute, state) => {
 
   // 1. ADMIN
   if (role == Role.ADMIN) {
-    if (currentUrl.startsWith('/admin')) return true;
-    return router.createUrlTree(['/admin']);
+    //console.log('entre en admin');
+    if (currentUrl.startsWith('/private/admin')) return true;
+    return router.createUrlTree(['/private/admin']);
   }
 
   // 2. TEACHER / FORMADOR

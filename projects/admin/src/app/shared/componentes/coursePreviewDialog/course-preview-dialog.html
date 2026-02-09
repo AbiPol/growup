@@ -1,0 +1,103 @@
+<p-dialog [visible]="visible()" (visibleChange)="onClose.emit()" [modal]="true" [header]="'Previsualización del Curso'"
+    [style]="{width: '55vw'}" [breakpoints]="{'960px': '80vw', '640px': '95vw'}"
+    styleClass="growup-premium-dialog rounded-[2.5rem] overflow-hidden">
+    @if (course()) {
+    <div class="space-y-8 p-1">
+        <!-- Header Card -->
+        <header
+            class="bg-gray-50 dark:bg-gray-800/40 p-8 rounded-[2rem] border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="flex items-center gap-3 mb-4">
+                    <p-tag [value]="course()?.category" severity="secondary"
+                        styleClass="rounded-full px-4 text-[10px] font-black uppercase tracking-widest" />
+                    <p-tag [value]="course()?.level" severity="info"
+                        styleClass="rounded-full px-4 text-[10px] font-black uppercase tracking-widest" />
+                </div>
+                <h3 class="text-3xl font-black text-gray-900 dark:text-white leading-tight mb-3">
+                    {{ course()?.name }}
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400 font-medium max-w-2xl">
+                    {{ course()?.description }}
+                </p>
+            </div>
+            <div class="absolute right-0 top-0 w-32 h-32 bg-brand-500/5 rounded-full -mr-16 -mt-16"></div>
+        </header>
+
+        <!-- Instructor Info -->
+        <div
+            class="flex items-start gap-4 p-6 bg-white dark:bg-gray-800 rounded-3xl border border-gray-50 dark:border-gray-700 shadow-sm">
+            <div
+                class="w-14 h-14 rounded-2xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center text-brand-600">
+                <i class="pi pi-user text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Instructor</p>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white leading-none mb-1">{{
+                    course()?.instructor?.name }}</h4>
+                <p class="text-xs text-gray-500 italic">{{ course()?.instructor?.role }}</p>
+            </div>
+        </div>
+
+        <!-- Syllabus Section -->
+        <div>
+            <h4 class="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-6 pl-2">Contenido Estructurado
+            </h4>
+            <div class="grid grid-cols-1 gap-6">
+                @for (module of course()?.syllabus; track module.title) {
+                <div
+                    class="bg-white dark:bg-gray-800/50 rounded-3xl border border-gray-100 dark:border-gray-700/50 p-6 hover:border-brand-200 dark:hover:border-brand-900/50 transition-colors">
+                    <div class="flex items-center justify-between mb-4">
+                        <h5 class="font-extrabold text-gray-900 dark:text-white text-lg italic flex items-center gap-3">
+                            <span
+                                class="w-8 h-8 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs font-bold not-italic">{{
+                                $index + 1 }}</span>
+                            {{ module.title }}
+                        </h5>
+                    </div>
+                    <ul class="space-y-3">
+                        @for (topic of module.topics; track topic.title) {
+                        <li
+                            class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-gray-50/50 dark:border-gray-700/30 group hover:bg-white dark:hover:bg-gray-800 transition-all">
+                            <span class="flex items-center gap-3 text-sm font-bold text-gray-600 dark:text-gray-300">
+                                <i
+                                    class="pi pi-play-circle text-brand-500 group-hover:scale-125 transition-transform"></i>
+                                {{ topic.title }}
+                            </span>
+                            <span
+                                class="text-[10px] font-black bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-full text-gray-500 dark:text-gray-400">{{
+                                topic.duration }} MIN</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+                }
+            </div>
+        </div>
+
+        <!-- Actions Section (Approval/Rejection) -->
+        @if (course()?.publicationStatus === 'En Revision') {
+        <div
+            class="bg-brand-50 dark:bg-brand-900/10 p-8 rounded-[2.5rem] border border-brand-100 dark:border-brand-900/30 space-y-6">
+            <div class="flex flex-col">
+                <h4 class="text-xl font-black text-brand-900 dark:text-brand-100 mb-2">Revisión de Propuesta</h4>
+                <p class="text-brand-600 dark:text-brand-400 text-sm font-medium">Por favor, indica las observaciones
+                    antes de tomar una decisión.</p>
+            </div>
+
+            <textarea pTextarea rows="4" [(ngModel)]="justification"
+                placeholder="Ej: El programa parece completo, pero la sección 2 necesita más detalle en los temas prácticos..."
+                class="w-full rounded-2xl border-brand-200/50 dark:border-brand-900/50 bg-white dark:bg-gray-900/80 p-4 font-medium text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-brand-500 transition-all outline-none"></textarea>
+
+            <div class="flex gap-4">
+                <button pButton label="Aprobar Curso" icon="pi pi-check" [disabled]="justification().length < 10"
+                    (click)="handleStatusChange('Publicado')"
+                    class="p-button-success flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-green-500/20"></button>
+                <button pButton label="Rechazar con Observaciones" icon="pi pi-times"
+                    [disabled]="justification().length < 10" (click)="handleStatusChange('Borrador')"
+                    class="p-button-danger flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-red-500/20"></button>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</p-dialog>

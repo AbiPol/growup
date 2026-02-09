@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-forgot-component',
+  selector: 'growup-forgot-component',
   imports: [],
   templateUrl: './forgot-component.html',
   styles: ``,
